@@ -1,0 +1,157 @@
+Controle de Versão Distribuído
+Chaves Git: C:\Users\Dell-5547\.ssh
+
+Git - Trabalhar localmente, depois subir para um servidor.
+Github/Gitlab - Plataforma online onde pode hospedar códigos com o git.
+Github :
+Depois de criar o repositório, ir nele, e pode baixa-lo
+pegando a url para clonar o projeto (git clone)
+
+
+Fluxo Git:
+
+git status, git add nomeArquivo.extensao, git commit -m "comentário", git push origin master.
+
+
+Comandos (Necessário lembrar das variáções dos comandos):
+
+git tag - Visualizar versões dos arquivos.
+	Controle geral de versões: Esse comando serve para adicionar um marcador de versão (não sendo somente 		numerada, como "v1.0a","v1.0b", para que tenhamos controle da evolução do projeto. Com isso é permitido 
+	adicionar um marcador ao projeto que é chamado de tag, o comando permitime visualizar todas as tags do 		projeto
+git checkout - Baixar todo o projeto por versão, com git checkout v1.0a
+git diff - Visualizar o que foi alterado entre arquivos e nas versões do projeto. Com git diff v1.0a v1.0b
+git blame - Capacidade de mostrar alteração linha a linha do arquivo, e quem alterou, quando foi alterado. com
+	git blame index.html
+git clone URL - Para baixar o projeto na máquina localmente e desenvolver, por padrão coloca numa pasta com o 		mesmo nome do repositório(URL).
+git init - Transformar sua pasta em repositório controlado pelo git, *se estiver vazia a pasta continua com 		aparencia normal porem, já é um repositório git.
+git ls-files - Para saber dentro do projeto quais arquivos o git está controlando. 
+git status - Mostra o estado atual do repositório local pro git. Caso aparecam arquivos UNTRACKTED quer dizer 		que o arquivo(s) não é controlado pelo git.
+git add - Adiciona os arquivos (novos) não gerenciados pelo git ao repositório e modificações de arquivos já 		gerenciados. Sendo que é necessário do nome do 	arquivo como - git add index.html ou git add . (ponto), 	onde indica todos os arquivos não rastreados. O comando git add -i - forma interetiva de adicionar 		arquivos.
+git commit - Salva as alterações do repositório (localmente), com o comando git commit -m "comentário"
+git config user.name "" 
+git config user.email "" - Configurando quem é o usuário que está fazendo o commit, para conseguir rastrear.
+git remote add - Ligação entre o Git e Github (Repositório remoto)
+git log - Exibe o histórico dos usuários que fizerem commit, com data, versão, apertando q ele saí da "tela" de 	log.
+git log -p - Exibe cada umas das alterações dos commits linha a linha.
+git whatchanged - Consegue visualizar além da mensagem do commit, quais os arquivos que foram alterados.
+	porem, se utilizar o comando git whatchanged -p (flag), consegue visualizar cada linha que foi alterada 	e em cada arquivo.
+git remote - Mostra quais repositórios remotos o repositório local tem.
+git remote add origin URL.git - Adiciona um repositório remoto com o nome de origin ao seu repositório local
+	Sintaxe completa: git remote add [alias_do_repositorio] [uri_do_repositorio]
+	Ao executarmos o comando, nenhuma saída é mostrada no prompt.
+git remote -v - Visualiza os repositórios remotos com a url.
+git push - Envia as alterações pro repositório remoto.
+	*Outra alternativa é utilizar, no primeiro push, a opção -u ou --set-upstream. Ela atrela a branch 		remota à local, fazendo com que não seja mais necessário passar como parâmetros a origem e a branch no 		comando push, que fica então assim: git push.
+git push origin master - Envia as alterações pro repositório remoto demominado origin com os dados da branch 		chamada master, seria do master pra o origin
+git pust -u origin design(branch) - Com o -u, o git associa a branch a master e não ocorrerá erros quando 	executar o comando git pull, pois ele saberá que a master está atualizada.
+git clone URL.git - Clona (Baixa) um repositório que está a url.git para a máquina, onde é criado uma pasta com 	o nome do repositório, isso pode ser modificado com mais um argumento no comando, que é:
+	git clone https://github.com/[usuario_do_dono_do_repositorio]/curso-git.git meuprojeto <- Nome 		modificado. Não é recomendado mudar por conta de conflitos com o nome da pasta
+	*Ao clonar um repositório, não precisamos adicionar o repositório remoto através do comando git remote 		add, pois tudo já é feito pelo comando git clone, dando um alias "origin" para o repositório.
+git branch - Exibi todas as branches do repositório. E um astérico(*) indica a branch atual do repositório, a 		que estamos trabalhando no momento.
+git branch nomeBranch - Cria uma nova branch para poder trabalhar, como git branch design, que inicialmente é 		um ponto de partida a partir da master, quer dizer, que tudo o que tem lá é clonado para a branch.
+git branch -r - Exibe as branches criadas no repositório remoto, ainda não atualizado.
+git branch -t design origin/design - Cria uma branch local baseada(trackeada) na branch criada remotamente, 	pois o pull só 	adiciona os arquivos que estão na master.
+git checkout design (branch criada) - O comando checkout também é utilizado para modificar a branch que estamos 	trabalhando, da master(principal) para a design(branch).
+
+
+
+
+
+
+
+
+
+
+
+
+Chaves de Segurança (SSH)
+
+Agora que temos o Git instalado, podemos utilizar os serviços do Github. Primeiro precisamos criar uma conta. Para isso acessamos a página https://github.com/plans, escolhemos o tipo de conta que queremos criar e prosseguimos preenchendo os formulários pedidos.
+
+Depois de criada nossa conta, precisamos gerar uma senha (chave de segurança) que será responsável por identificar nossa máquina quando fizermos as interações entre nosso projeto e o serviço do Github. Caso não exista essa configuração entre nossa máquina e a conta do Github, o acesso ao serviço pelos comandos do Git será negado.
+
+O processo de criação da chave de segurança é similar em todos os sistemas operacionais: basta abrir o prompt de comando (no caso do Windows, é necessário abrir o Git Bash) e inserir o seguinte comando:
+
+ssh-keygen -t rsa -C "seu_email@provedor.com"
+Lembre-se de substituir seu_email@provedor.com pelo seu endereço real de email. A resposta do terminal vai perguntar em qual local do seu disco você quer salvar sua chave de segurança. Para evitar problemas, mantenha a opção padrão. Em algumas versões, pode ser necessário incluir também a opção -b 2048 ou -b 4096 para indicar o tamanho da chave a ser gerada.
+
+A seguir, será solicitada a entrada de uma senha para a chave de segurança. Caso o computador seja público ou compartilhado, é recomendado que sua chave esteja protegida por uma senha. Caso contrário, recomendamos que a senha seja ignorada, bastando pressionar Enter ao ser solicitada a senha e a confirmação de senha.
+
+Agora será necessário realizar o login no http://github.com e seguir para as configurações do seu perfil. Siga "Settings", "SSH and GPG keys" e "New SSH key".
+
+Insira na caixa de texto o conteúdo do seu arquivo id_rsa.pub. O local exato do arquivo foi informado na saída do processo de criação da chave. Cole-o exatamente como ele está, sem adição de espaços ou quebras de linha.
+
+
+
+
+
+
+Estágios do Git:
+
+Criar diretório sem nenhum arquivo a ser rastreado - Working Directory
+Depois de adicionar untrackted files ao git com o git add é iniciado um novo estágio - Index ou Staging Area
+Depois de satisfeitos com o os conteúdos no Index, podemos dar o proximo passo com o git commit e iniciar um novo estágio o HEAD, é o último estado que o git usa como referência.
+
+*working directory representa o estado atual dos arquivos no repositório. Podemos utilizar o comando git add para adicioná-los ao index, ou staging area, que representa uma visão preliminar das modificações que queremos definir para nosso projeto, comparando essas ao HEAD, o último passo completo do nosso projeto, que serve de referência para comparação do trabalho com o working directory.
+
+
+
+
+
+Observações:	
+
+Sempre utilizado o git status para ter noção de como estão os arquivos no projeto.
+Caso haja algum não versionado (Untracked files) utilizar o git add e nome do arquivo ou ponto(.)
+E também utilizar o git add para modificações de arquivos.
+Depois disso fica permitido realizar o commit com o comado git commit -m "Comentário"
+
+Apesar de demonstrarmos o uso do Git desde o início do projeto, podemos utilizar os mesmos passos em um projeto existente para que ele possa, a partir de um momento, ser controlado pelo Git.
+
+O comando git add pode ser executado de modo interativo com a opção -i. Ao rodar o comando completo, git add -i, o modo interativo inicia um prompt de comando específico, aguardando as decisões do usuário sobre quais as alterações detectadas no working directory devem ser adicionadas ao index.
+
+Num ciclo simples de controle de um projeto com o Git, muitas vezes podemos querer adicionar ao HEAD todas as alterações que foram realizadas no working directory. O comando git commit oferece uma opção para que possamos evitar o passo de adicionar manualmente os arquivos ao index, gerando um commit que já inclui todas as modificações feitas no projeto.
+by using the -a switch with the commit command to automatically "add" changes from all known files (i.e. all files that are already listed in the index) and to automatically "rm" files in the index that have been removed from the working tree, and then perform the actual commit;
+
+Projetos locais já existentes:
+
+	Dentro da pasta onde está o código, usar o comando abaixo para iniciar o repositório
+
+	$ git init
+	Para adicionar todas os arquivos para o próximo commit, executar o comando abaixo
+
+	$ git add .
+	Para efetuar o primeiro commit para seu repositório local, executar o comando abaixo
+
+	$ git commit -m "Primeiro Commit"
+	Para adicionar um endereço de repositório remoto, executar o comando abaixo
+
+	$ git remote add origin endereco_do_repositorio.git
+	Para enviar o código para o repositório remoto adicionado anteriormente, executar o comando abaixo
+
+	$ git push -u origin master
+	Fonte de informações https://help.github.com/articles/adding-an-existing-project-to-github-using-the-	command-line/
+
+
+Clonar:
+	Pegando um repositório que já existe, para fazer isso é necessário ir no repositório (Github) e obter a 	url e utilizar o comando git clone URL.git
+
+Adicionar colaboradores:
+Para adicionar outros usuários ao seu repositório é necessário no repositório, 
+	Um projeto no Github pode ter diversos colaboradores. Para fazer isso, siga as instruções abaixo:
+	Abra a página do projeto no Github
+	Abra a aba Settings
+	Clique na seção Collaborators, à esquerda
+	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 	aparecerão os usuários mais próximos da busca atual.
+
+Branches:
+Recomendo criar para desenvolver  o códido em uma area especifíca do repositóri e depois integrar no repositório principal, na linha de desenvolvimento principal, na master.
+
+Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
+
+
+
+
+
+
+
+
