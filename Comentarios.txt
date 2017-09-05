@@ -42,10 +42,10 @@ git remote add origin URL.git - Adiciona um repositório remoto com o nome de ori
 git remote -v - Visualiza os repositórios remotos com a url.
 git push - Envia as alterações pro repositório remoto.
 	*Outra alternativa é utilizar, no primeiro push, a opção -u ou --set-upstream. Ela atrela a branch 		remota à local, fazendo com que não seja mais necessário passar como parâmetros a origem e a branch no 		comando push, que fica então assim: git push.
-git push origin(remote) master(branch) - Envia as alterações pro repositório remoto demominado origin com os 	dados da branch chamada master, seria do master pra o origin
+git push origin(remote) master(branch) - Envia as alterações pro repositório remoto demominado origin com os 		dados da branch chamada master, seria do master pra o origin
 git push -u origin(remota) design(branch) - Com o -u, o git associa a branch a master e não ocorrerá erros 		quando executar o comando git pull, pois ele saberá que a master está atualizada.
 git push -d origin(remota) design(branch) - Este comando remove a branch remota design.
-git pull origin(remote) master(branch) - Atualiza o repositório local com as modificações do repositório 	remoto, para lidar com os conflitos.
+git pull origin(remote) master(branch) - Atualiza o repositório local com as modificações do repositório 		remoto, para lidar com os conflitos.
 git clone URL.git - Clona (Baixa) um repositório que está a url.git para a máquina, onde é criado uma pasta com 	o nome do repositório, isso pode ser modificado com mais um argumento no comando, que é:
 	git clone https://github.com/[usuario_do_dono_do_repositorio]/curso-git.git meuprojeto <- Nome 			modificado. Não é recomendado mudar por conta de conflitos com o nome da pasta
 	*Ao clonar um repositório, não precisamos adicionar o repositório remoto através do comando git remote 		add, pois tudo já é feito pelo comando git clone, dando um alias "origin" para o repositório.
@@ -53,14 +53,20 @@ git branch - Exibi todas as branches do repositório. E um astérico(*) indica a b
 git branch nomeBranch - Cria uma nova branch para poder trabalhar, como git branch design, que inicialmente é 		um ponto de partida a partir da master, quer dizer, que tudo o que tem lá é clonado para a branch.
 git branch -r - Exibe as branches criadas no repositório remoto, ainda não atualizado.
 git branch -a - Exibe as branches locais e remotas.
-git branch -d nomeBranch - Remove uma branch local se estiver sincronizada com outra é necessario utilizar o 	paramentro -D.
+git branch -d nomeBranch - Remove uma branch local se estiver sincronizada com outra é necessario utilizar o 		paramentro -D.
 git branch -t design origin/design - Cria uma branch local baseada(trackeada) na branch criada remotamente, 		pois o pull só 	adiciona os arquivos que estão na master.
 git checkout design (branch criada) - O comando checkout também é utilizado para modificar a branch que estamos 	trabalhando, da master(principal) para a design(branch).
 git checkout -b design - Que indica que você quer mudar para a branch design, mas ao mesmo tempo criá-la com a 		opção -b que representa nova branch porem, sem fazer a ligação entre branch remota e branch local.
-git fetch origin - Este comando verifica todas as atualizações que foram realizadas no repositório de atalho 	origin.
+git fetch origin - Este comando verifica todas as atualizações que foram realizadas no repositório de atalho 		origin.
+git merge nomeBranch - Traz os commits da branch local para a branch master, mais especificamente da branch 		que está no comando git merge <branch> para a branch que está no momento, nesse caso é necessário fazer 	o git checkout master para obter os commits , que é a branch sempre ligada ao repositório.
+	Move os commits de uma determinada branch para outra branch.
+git rebase master(base) desenvolvimento(branch que será atualizada) - Atualiza um branch com base em outra, 		para evitar os commits de merge e conflitos muito grandes.
+git rebase --continue - Caso se tenha atualizado a master com git pull, e depois disso se tenha que atualizar a 	branch com git rebase master branch e ocorra um conflito. Nesse momento, o Git nos deixa resolver o 	conflito existente no rebase, de forma manual. Para isso, o próprio Git nos coloca em um "ambiente 	temporário", no caso, uma branch temporária, só para resolvermos o conflito. Nesse momento, se fosse 	executado o comando git branch, teríamos o seguinte resultado:
 
-
-
+	* (no branch)
+	desenvolvimento
+	master
+	, depois de resolvido, isso quer dizer ir no 	editor ou ide que se está utilizando e tirar os 	comentários colocados pelo git, para continuar o 	processo é necessário o comando git rebase --	continue.
 
 
 
@@ -143,12 +149,12 @@ Clonar:
 	Pegando um repositório que já existe, para fazer isso é necessário ir no repositório (Github) e obter a 	url e utilizar o comando git clone URL.git
 
 Adicionar colaboradores:
-Para adicionar outros usuários ao seu repositório é necessário no repositório, 
+	Para adicionar outros usuários ao seu repositório é necessário no repositório, 
 	Um projeto no Github pode ter diversos colaboradores. Para fazer isso, siga as instruções abaixo:
 	Abra a página do projeto no Github
 	Abra a aba Settings
 	Clique na seção Collaborators, à esquerda
-	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 	aparecerão os usuários mais próximos da busca atual.
+	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 		aparecerão os usuários mais próximos da busca atual.
 
 Branches:
 Branch - Ramo, uma separação da linha principal de desenvolvimento
@@ -157,7 +163,7 @@ Recomendo criar para desenvolver  o códido em uma area especifíca do repositório
 Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
 Dúvidas:
-Como commit o código de uma branch para outra ?
+Como commitar o código de uma branch para outra ? R: git merge branch - Estando na branch que se quer obter os dados de outra branch
 
 
 Conflitos: 
@@ -181,11 +187,11 @@ indicando ao git que foi finalizado o merge e pode fazer um commit e push.
 
 Lock: Travar um determinado arquivo para que só você possa edita-lo.
 
-
+Lidando com conflitos, cada desenvolvedor ira trabalhar em uma branch
 
 Merge:
 >>>>>
-O comando git mergetool --tool-help mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
+git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
 =====
 <<<<<
 
