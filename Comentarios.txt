@@ -10,7 +10,7 @@ pegando a url para clonar o projeto (git clone)
 
 Fluxo Git:
 
-git status, git add nomeArquivo.extensao, git commit -m "comentário", git push origin master.
+git status, git pull (sincronizar com o remoto e resolver conflitos), git add nomeArquivo.extensao, git commit -m "comentário", git push origin master.
 
 
 Comandos (Necessário lembrar das variáções dos comandos):
@@ -42,16 +42,23 @@ git remote add origin URL.git - Adiciona um repositório remoto com o nome de ori
 git remote -v - Visualiza os repositórios remotos com a url.
 git push - Envia as alterações pro repositório remoto.
 	*Outra alternativa é utilizar, no primeiro push, a opção -u ou --set-upstream. Ela atrela a branch 		remota à local, fazendo com que não seja mais necessário passar como parâmetros a origem e a branch no 		comando push, que fica então assim: git push.
-git push origin master - Envia as alterações pro repositório remoto demominado origin com os dados da branch 		chamada master, seria do master pra o origin
-git pust -u origin design(branch) - Com o -u, o git associa a branch a master e não ocorrerá erros quando 	executar o comando git pull, pois ele saberá que a master está atualizada.
+git push origin(remote) master(branch) - Envia as alterações pro repositório remoto demominado origin com os 	dados da branch chamada master, seria do master pra o origin
+git push -u origin(remota) design(branch) - Com o -u, o git associa a branch a master e não ocorrerá erros 		quando executar o comando git pull, pois ele saberá que a master está atualizada.
+git push -d origin(remota) design(branch) - Este comando remove a branch remota design.
+git pull origin(remote) master(branch) - Atualiza o repositório local com as modificações do repositório 	remoto, para lidar com os conflitos.
 git clone URL.git - Clona (Baixa) um repositório que está a url.git para a máquina, onde é criado uma pasta com 	o nome do repositório, isso pode ser modificado com mais um argumento no comando, que é:
-	git clone https://github.com/[usuario_do_dono_do_repositorio]/curso-git.git meuprojeto <- Nome 		modificado. Não é recomendado mudar por conta de conflitos com o nome da pasta
+	git clone https://github.com/[usuario_do_dono_do_repositorio]/curso-git.git meuprojeto <- Nome 			modificado. Não é recomendado mudar por conta de conflitos com o nome da pasta
 	*Ao clonar um repositório, não precisamos adicionar o repositório remoto através do comando git remote 		add, pois tudo já é feito pelo comando git clone, dando um alias "origin" para o repositório.
 git branch - Exibi todas as branches do repositório. E um astérico(*) indica a branch atual do repositório, a 		que estamos trabalhando no momento.
 git branch nomeBranch - Cria uma nova branch para poder trabalhar, como git branch design, que inicialmente é 		um ponto de partida a partir da master, quer dizer, que tudo o que tem lá é clonado para a branch.
 git branch -r - Exibe as branches criadas no repositório remoto, ainda não atualizado.
-git branch -t design origin/design - Cria uma branch local baseada(trackeada) na branch criada remotamente, 	pois o pull só 	adiciona os arquivos que estão na master.
+git branch -a - Exibe as branches locais e remotas.
+git branch -d nomeBranch - Remove uma branch local se estiver sincronizada com outra é necessario utilizar o 	paramentro -D.
+git branch -t design origin/design - Cria uma branch local baseada(trackeada) na branch criada remotamente, 		pois o pull só 	adiciona os arquivos que estão na master.
 git checkout design (branch criada) - O comando checkout também é utilizado para modificar a branch que estamos 	trabalhando, da master(principal) para a design(branch).
+git checkout -b design - Que indica que você quer mudar para a branch design, mas ao mesmo tempo criá-la com a 		opção -b que representa nova branch porem, sem fazer a ligação entre branch remota e branch local.
+git fetch origin - Este comando verifica todas as atualizações que foram realizadas no repositório de atalho 	origin.
+
 
 
 
@@ -144,14 +151,50 @@ Para adicionar outros usuários ao seu repositório é necessário no repositório,
 	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 	aparecerão os usuários mais próximos da busca atual.
 
 Branches:
-Recomendo criar para desenvolver  o códido em uma area especifíca do repositóri e depois integrar no repositório principal, na linha de desenvolvimento principal, na master.
+Branch - Ramo, uma separação da linha principal de desenvolvimento
+Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no repositório principal, na linha de desenvolvimento principal, na master.
 
 Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
+Dúvidas:
+Como commit o código de uma branch para outra ?
+
+
+Conflitos: 
+
+Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão inseridas.
+
+Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes commits, de merge.
+
+Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o conflito
+Depois do pull seu arquivo terá anotações como essas:
+
+Anotações do Git
+<<<<< HEAD
+	//Seu código como está no repositório local
+=====
+	//Código do remote que gerou conflito
+>>>>> hashcode
+
+Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é necessário um git add .,
+indicando ao git que foi finalizado o merge e pode fazer um commit e push.
+
+Lock: Travar um determinado arquivo para que só você possa edita-lo.
 
 
 
+Merge:
+>>>>>
+O comando git mergetool --tool-help mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
+=====
+<<<<<
 
+Desafio:
+ Problemas com o merge
+PRÓXIMA ATIVIDADE
 
+O processo de tratar conflitos é o mais crítico quando se trabalha com controle de versões e também um dos mais complicados de se compreender.
+Se em nenhum momento você já precisou realizar o processo de merge quando trabalhou com controle de versões, imagine como seria o processo de corrigir os conflitos feitos por vários desenvolvedores.
 
+Faça o teste! Crie um repositório local e acesse por duas abas diferentes do terminal, em duas branches diferentes. Faça diversas alterações em cada uma, jogue as alterações para a master e veja quais as dificuldades.
 
