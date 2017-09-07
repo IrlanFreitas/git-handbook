@@ -66,8 +66,10 @@ git rebase --continue - Caso se tenha atualizado a master com git pull, e depois
 	* (no branch)
 	desenvolvimento
 	master
-	, depois de resolvido, isso quer dizer ir no 	editor ou ide que se está utilizando e tirar os 	comentários colocados pelo git, para continuar o 	processo é necessário o comando git rebase --	continue.
-
+	Por fim, caso queiramos resolver o conflito, seja para ficar com nossa alteração, ou seja para fazer 	alguma outra modificação, é necessário permanecer nessa branch temporária, e corrigir os arquivos 	conflitados. O primeiro passo para descobrir quais arquivos devem ser mexidos é executar o comando git 	status
+	, depois de resolvido, isso quer dizer ir no editor ou ide que se está utilizando e tirar os 		comentários colocados pelo git, para continuar o processo é necessário o comando git rebase --		continue.
+	Atributos do rebase
+	--continue deve ser utilizado após a resolução manual de conflitos; --skip faz com que suas alterações 	sejam descartadas; --abort volta atrás em todo o processo de rebase
 
 
 
@@ -156,9 +158,11 @@ Adicionar colaboradores:
 	Clique na seção Collaborators, à esquerda
 	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 		aparecerão os usuários mais próximos da busca atual.
 
-Branches:
+Branch:
 Branch - Ramo, uma separação da linha principal de desenvolvimento
 Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no repositório principal, na linha de desenvolvimento principal, na master.
+Referencia Git.
+https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%C3%A9-um-Branch
 
 Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
