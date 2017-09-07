@@ -61,18 +61,20 @@ git fetch origin - Este comando verifica todas as atualizações que foram realiza
 git merge nomeBranch - Traz os commits da branch local para a branch master, mais especificamente da branch 		que está no comando git merge <branch> para a branch que está no momento, nesse caso é necessário fazer 	o git checkout master para obter os commits , que é a branch sempre ligada ao repositório.
 	Move os commits de uma determinada branch para outra branch.
 git rebase master(base) desenvolvimento(branch que será atualizada) - Atualiza um branch com base em outra, 		para evitar os commits de merge e conflitos muito grandes.
-git rebase --continue - Caso se tenha atualizado a master com git pull, e depois disso se tenha que atualizar a 	branch com git rebase master branch e ocorra um conflito. Nesse momento, o Git nos deixa resolver o 	conflito existente no rebase, de forma manual. Para isso, o próprio Git nos coloca em um "ambiente 	temporário", no caso, uma branch temporária, só para resolvermos o conflito. Nesse momento, se fosse 	executado o comando git branch, teríamos o seguinte resultado:
+git rebase --continue - Caso se tenha atualizado a master com git pull, e depois disso se tenha que atualizar a 	branch com git rebase master branch e ocorra um conflito. Nesse momento, o Git nos deixa resolver o 		conflito existente no rebase, de forma manual. Para isso, o próprio Git nos coloca em um "ambiente 		temporário", no caso, uma branch temporária, só para resolvermos o conflito. Nesse momento, se fosse 		executado o comando git branch, teríamos o seguinte resultado:
 
 	* (no branch)
 	desenvolvimento
 	master
-	Por fim, caso queiramos resolver o conflito, seja para ficar com nossa alteração, ou seja para fazer 	alguma outra modificação, é necessário permanecer nessa branch temporária, e corrigir os arquivos 	conflitados. O primeiro passo para descobrir quais arquivos devem ser mexidos é executar o comando git 	status
-	, depois de resolvido, isso quer dizer ir no editor ou ide que se está utilizando e tirar os 		comentários colocados pelo git, para continuar o processo é necessário o comando git rebase --		continue.
+	Por fim, caso queiramos resolver o conflito, seja para ficar com nossa alteração, ou seja para fazer 		alguma outra modificação, é necessário permanecer nessa branch temporária, e corrigir os arquivos 		conflitados. O primeiro passo para descobrir quais arquivos devem ser mexidos é executar o comando git 		status
+	, depois de resolvido, isso quer dizer ir no editor ou ide que se está utilizando e tirar os 			comentários colocados pelo git, para continuar o processo é necessário o comando git rebase --			continue.
 	Atributos do rebase
-	--continue deve ser utilizado após a resolução manual de conflitos; --skip faz com que suas alterações 	sejam descartadas; --abort volta atrás em todo o processo de rebase
+	--continue deve ser utilizado após a resolução manual de conflitos; --skip faz com que suas alterações 		sejam descartadas; --abort volta atrás em todo o processo de rebase
 
-
-
+git checkout nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add
+git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo> - Coloca o arquivo prospota_1, 	mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou 	qualquer outro somente utilizar o hash do commit.
+git reset 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Voltar ao estado do commit 	anterior ou fazer uma alteração no commit anterior.
+git revert 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Defazer as alterações de um 	commit.
 
 
 
@@ -166,9 +168,6 @@ https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%
 
 Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
-Dúvidas:
-Como commitar o código de uma branch para outra ? R: git merge branch - Estando na branch que se quer obter os dados de outra branch
-
 
 Conflitos: 
 
@@ -207,4 +206,13 @@ O processo de tratar conflitos é o mais crítico quando se trabalha com controle 
 Se em nenhum momento você já precisou realizar o processo de merge quando trabalhou com controle de versões, imagine como seria o processo de corrigir os conflitos feitos por vários desenvolvedores.
 
 Faça o teste! Crie um repositório local e acesse por duas abas diferentes do terminal, em duas branches diferentes. Faça diversas alterações em cada uma, jogue as alterações para a master e veja quais as dificuldades.
+
+
+Dúvidas:
+Como commitar o código de uma branch para outra ? 
+R: git merge branch - Estando na branch que se quer obter os dados de outra branch.
+
+O que é gitflow ?
+
+
 
