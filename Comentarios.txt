@@ -71,21 +71,22 @@ git rebase --continue - Caso se tenha atualizado a master com git pull, e depois
 	Atributos do rebase
 	--continue deve ser utilizado após a resolução manual de conflitos; --skip faz com que suas alterações 		sejam descartadas; --abort volta atrás em todo o processo de rebase
 
-git checkout nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add, quer 	dizer no estado de Working Directory, então o arquivo ficará no estado HEAD da branch atual.
+git checkout --(Dois hífens) nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes 	do git add, quer dizer no estado de Working Directory, então o arquivo ficará no estado HEAD da branch 	atual. Caso se possua um arquivo como o mesmo nome da branch utilizar o parametro de --(Dois hífens) 	para indica que daqui pra frente só serão passados arquivos.
 git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo> - Coloca o arquivo prospota_1, 		mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou 		qualquer outro somente utilizar o hash do commit. Isso quando o arquivo(s) já estão em estado de Index.
 git reset 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Voltar ao estado do commit 		anterior ou fazer uma alteração no commit anterior.
 git revert 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Defazer as alterações de um 		commit.
-git stash - Repositório criado temporariamente para salvar as alterações, para que depois se retorne a 	continuar de onde foi salvo nesse repositório temporario.
+git stash - Repositório criado temporariamente para salvar as alterações, para que depois se retorne a 		continuar de onde foi salvo nesse repositório temporario.
 git stash list - Exibe se há algo guardado no stash para ser retomado.
 git stash pop - Traz o ultimo stash da lista
-git stash apply/pop stats@{0}<código do stash> - Aplica o stash ao repositório, o qual foi indicado pelo 	código.
+git stash apply/pop stats@{0}<código do stash> - Aplica o stash ao repositório, o qual foi indicado pelo 		código.
 git stash drop - Apaga as alterações temporárias guardadas no stash.
+git stash clear - Apaga TODA a pilha salva no stash guardado.
 git bisect start - Entrar em modo de bisect para procurando commits que tenham alterações que a gente quer.
 	é necessário que informe ao bisect qual commit é ruim, não tem as alterações que você procura e qual o 		commit que é bom.
 git bisect bad HEAD - Indicando que o estado de HEAD do git é o commit ruim.
 git bisect good 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Indicando qual o commit é o 	bom para procurar as alterações.
-git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram 	feitas nesse commit
-git show <.(ponto) ou nomeArquivo.ext< - Exibe quais alterações foram em todos os arquivos com o ponto e no 	arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
+git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram 		feitas nesse commit
+git show <.(ponto) ou nomeArquivo.ext< - Exibe quais alterações foram em todos os arquivos com o ponto e no 		arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
 
 
 
@@ -159,7 +160,11 @@ Projetos locais já existentes:
 	Para enviar o código para o repositório remoto adicionado anteriormente, executar o comando abaixo
 
 	$ git push -u origin master
-	Fonte de informações https://help.github.com/articles/adding-an-existing-project-to-github-using-the-	command-line/
+	Fonte de informações https://help.github.com/articles/adding-an-existing-project-to-github-using-the-		command-line/
+
+Github:
+	Boas práticas, depois de clonar o repositório que se quer trabalhar, é necessário criar uma branch para trabalhar, pois não é recomendado trabalhar direto na master que deve servir somente de sincronização com o remoto. Depois das alterações feitas na branch criada, git status -> git add . -> git commit -m , é necessário trocar de branch com o git checkout e fazer o git marge branch, pois você já está na master e subi essas alterações.
+
 
 
 Clonar:
@@ -174,42 +179,54 @@ Adicionar colaboradores:
 	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, 		aparecerão os usuários mais próximos da busca atual.
 
 Branch:
-Branch - Ramo, uma separação da linha principal de desenvolvimento
-Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no repositório principal, na linha de desenvolvimento principal, na master.
-Referencia Git.
-https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%C3%A9-um-Branch
+	Branch - Ramo, uma separação da linha principal de desenvolvimento
+	Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no 	repositório principal, na linha de desenvolvimento principal, na master.
+	Referencia Git.
+	https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%C3%A9-um-Branch
 
-Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
+	Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
 
 Conflitos: 
 
-Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão inseridas.
+	Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um 	conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o 	conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão 	inseridas.
 
-Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes commits, de merge.
+	Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes 	commits, de merge.
 
-Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o conflito
-Depois do pull seu arquivo terá anotações como essas:
+	Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o 	conflito
+	Depois do pull seu arquivo terá anotações como essas:
 
-Anotações do Git
-<<<<< HEAD
-	//Seu código como está no repositório local
-=====
-	//Código do remote que gerou conflito
->>>>> hashcode
+Anotações do Git:
+	<<<<< HEAD
+		//Seu código como está no repositório local
+	==========
+		//Código do remote que gerou conflito
+	>>>>> hashcode
 
-Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é necessário um git add .,
-indicando ao git que foi finalizado o merge e pode fazer um commit e push.
+	Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece 	forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é 	necessário um git add .,
+	indicando ao git que foi finalizado o merge e pode fazer um commit e push.
 
-Lock: Travar um determinado arquivo para que só você possa edita-lo.
+	Lock: Travar um determinado arquivo para que só você possa edita-lo.
 
-Lidando com conflitos, cada desenvolvedor ira trabalhar em uma branch
+	Lidando com conflitos, cada desenvolvedor ira trabalhar em uma branch
 
 Merge:
->>>>>
-git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
-=====
-<<<<<
+	>>>>>
+	git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa 	lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t 	nome_do_programa.
+	=====
+	<<<<<
+
+
+Aliases:
+
+	Criando comandos novos para digitar menos os comandos, fazendo isso no arquivo dentro do gitconfig
+	com
+	[alias]
+		st = status
+		co = checkout
+	isso dentro do arquivo.
+
+
 
 Desafio:
  Problemas com o merge
@@ -235,7 +252,7 @@ Estudar o bisect!
 Como ver as alterações de cada commit ?
 git show <hash commit>
 
-
+Estudar mais sobre o git rebase
 
 
 
