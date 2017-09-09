@@ -71,10 +71,23 @@ git rebase --continue - Caso se tenha atualizado a master com git pull, e depois
 	Atributos do rebase
 	--continue deve ser utilizado após a resolução manual de conflitos; --skip faz com que suas alterações 		sejam descartadas; --abort volta atrás em todo o processo de rebase
 
-git checkout nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add
-git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo> - Coloca o arquivo prospota_1, 	mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou 	qualquer outro somente utilizar o hash do commit.
-git reset 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Voltar ao estado do commit 	anterior ou fazer uma alteração no commit anterior.
-git revert 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Defazer as alterações de um 	commit.
+git checkout nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add, quer 	dizer no estado de Working Directory, então o arquivo ficará no estado HEAD da branch atual.
+git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo> - Coloca o arquivo prospota_1, 		mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou 		qualquer outro somente utilizar o hash do commit. Isso quando o arquivo(s) já estão em estado de Index.
+git reset 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Voltar ao estado do commit 		anterior ou fazer uma alteração no commit anterior.
+git revert 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Defazer as alterações de um 		commit.
+git stash - Repositório criado temporariamente para salvar as alterações, para que depois se retorne a 	continuar de onde foi salvo nesse repositório temporario.
+git stash list - Exibe se há algo guardado no stash para ser retomado.
+git stash pop - Traz o ultimo stash da lista
+git stash apply/pop stats@{0}<código do stash> - Aplica o stash ao repositório, o qual foi indicado pelo 	código.
+git stash drop - Apaga as alterações temporárias guardadas no stash.
+git bisect start - Entrar em modo de bisect para procurando commits que tenham alterações que a gente quer.
+	é necessário que informe ao bisect qual commit é ruim, não tem as alterações que você procura e qual o 		commit que é bom.
+git bisect bad HEAD - Indicando que o estado de HEAD do git é o commit ruim.
+git bisect good 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Indicando qual o commit é o 	bom para procurar as alterações.
+git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram 	feitas nesse commit
+git show <.(ponto) ou nomeArquivo.ext< - Exibe quais alterações foram em todos os arquivos com o ponto e no 	arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
+
+
 
 
 
@@ -209,10 +222,20 @@ Faça o teste! Crie um repositório local e acesse por duas abas diferentes do ter
 
 
 Dúvidas:
+
 Como commitar o código de uma branch para outra ? 
 R: git merge branch - Estando na branch que se quer obter os dados de outra branch.
 
 O que é gitflow ?
+
+Estudar mais os estados do git:  Working Directory, Index, HEAD!
+
+Estudar o bisect!
+
+Como ver as alterações de cada commit ?
+git show <hash commit>
+
+
 
 
 
