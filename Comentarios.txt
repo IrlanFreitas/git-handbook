@@ -35,6 +35,7 @@ git log - Exibe o histórico dos usuários que fizerem commit, com data, versão, a
 git log -p - Exibe cada umas das alterações dos commits linha a linha.
 git log --pretty - Configurando a forma de visualizar os logs.
 git log --stat - Forma resumida de exibir os logs.
+git log --graph - Mostra de forma mais visual os caminhos percorridos pelo repositório.
 git whatchanged - Consegue visualizar além da mensagem do commit, quais os arquivos que foram alterados.
 	porem, se utilizar o comando git whatchanged -p (flag), consegue visualizar cada linha que foi alterada 	e em cada arquivo.
 git remote - Mostra quais repositórios remotos o repositório local tem.
@@ -59,7 +60,7 @@ git branch -d nomeBranch - Remove uma branch local se estiver sincronizada com o
 git branch -t design origin/design - Cria uma branch local baseada(trackeada) na branch criada remotamente, 		pois o pull só 	adiciona os arquivos que estão na master.
 git checkout design (branch criada) - O comando checkout também é utilizado para modificar a branch que estamos 	trabalhando, da master(principal) para a design(branch).
 git checkout -b design - Que indica que você quer mudar para a branch design, mas ao mesmo tempo criá-la com a 		opção -b que representa nova branch porem, sem fazer a ligação entre branch remota e branch local.
-git fetch origin - Este comando verifica todas as atualizações que foram realizadas no repositório de atalho 		origin.
+git fetch origin<remote repository> - Este comando verifica todas as atualizações que foram realizadas no 		repositório de atalho origin. Traz as alterações do repositório remoto sem colocalas no projeto. Apenas 	realizará o download das novas alterações que não temos ainda em nosso repositório, mas não vai 	aplicá-las ainda.
 git merge nomeBranch - Traz os commits da branch local para a branch master, mais especificamente da branch 		que está no comando git merge <branch> para a branch que está no momento, nesse caso é necessário fazer 	o git checkout master para obter os commits , que é a branch sempre ligada ao repositório.
 	Move os commits de uma determinada branch para outra branch.
 git rebase master(base) desenvolvimento(branch que será atualizada) - Atualiza um branch com base em outra, 		para evitar os commits de merge e conflitos muito grandes.
@@ -88,9 +89,9 @@ git bisect start - Entrar em modo de bisect para procurando commits que tenham a
 git bisect bad HEAD - Indicando que o estado de HEAD do git é o commit ruim.
 git bisect good 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Indicando qual o commit é o 	bom para procurar as alterações.
 git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram 		feitas nesse commit
-git show <.(ponto) ou nomeArquivo.ext< - Exibe quais alterações foram em todos os arquivos com o ponto e no 		arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
+git show <.(ponto) ou nomeArquivo.ext> - Exibe quais alterações foram em todos os arquivos com o ponto e no 		arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
 
-Adicionando commits de outros usuários sem permitir o usuário.
+
 
 
 
@@ -172,6 +173,12 @@ Fork - Criar um cópia de um projeto/repositório que você não tem permissão para 
 
 Pull Request - Solicitando ao owner/dono do projeto que você deseja enviar uma modificação que você fez, no seu 	projeto clonado, mesmo que você não tenha permissão para commitar.
 
+Watch - Permite seguir um repositório e acompanhar seu progresso, sem necessáriamente contribuir. Github te 	notifica a cada atividade que ocorre no repositório, te permitindo acompanhar praticamente em tempo 	real o andamento do projeto.
+
+Interessante quando se trabalha com o git, depois do fork, ter dois remotes, um para o seu repositório e outro para o original, nesse caso teria um git remote add origin url_fork.git e outro, git remote add original url_original.git, para sempre manter atualizado. Agora para atualizar é necessário utilizar o nome do repositório corretamente no caso do pull, como git pull ORIGINAL master, que é o repositório onde se está fazendo fork.
+
+
+
 
 Clonar:
 	Pegando um repositório que já existe, para fazer isso é necessário ir no repositório (Github) e obter a 	url e utilizar o comando git clone URL.git
@@ -186,7 +193,7 @@ Adicionar colaboradores:
 
 Branch:
 	Branch - Ramo, uma separação da linha principal de desenvolvimento
-	Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no 	repositório principal, na linha de desenvolvimento principal, na master.
+	Recomendo criar para desenvolver  o códido em uma area especifíca do repositório e depois integrar no 		repositório principal, na linha de desenvolvimento principal, na master.
 	Referencia Git.
 	https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%C3%A9-um-Branch
 
@@ -195,11 +202,11 @@ Branch:
 
 Conflitos: 
 
-	Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um 	conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o 	conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão 	inseridas.
+	Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um 		conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o 	conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão 		inseridas.
 
-	Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes 	commits, de merge.
+	Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes 		commits, de merge.
 
-	Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o 	conflito
+	Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o 		conflito
 	Depois do pull seu arquivo terá anotações como essas:
 
 Anotações do Git:
@@ -258,7 +265,9 @@ Estudar o bisect!
 Como ver as alterações de cada commit ?
 git show <hash commit>
 
-Estudar mais sobre o git rebase
+Estudar mais sobre o git rebase e o git fecth.
+
+Como saber quais os arquivos estão no add .(estado de Index)
 
 
 
