@@ -90,6 +90,12 @@ git bisect bad HEAD - Indicando que o estado de HEAD do git é o commit ruim.
 git bisect good 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Indicando qual o commit é o 	bom para procurar as alterações.
 git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram 		feitas nesse commit
 git show <.(ponto) ou nomeArquivo.ext> - Exibe quais alterações foram em todos os arquivos com o ponto e no 		arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
+git cherry-pick <hash commit> - Traz somente commits colocados no hash para a branch que se está, como exemplo:
+	Desenvolver funcionalidades em uma branch chamada dev, depois de corrigido bugs, como ainda se está 	fazendo as novas features, seleciona o commit com os ajustes, traz para master com o cherry-pick e 	continua a desenvolver na branch dev.
+	Perigos do Cherry Pick:
+	Com cherry-pick, temos a liberdade de escolher quais commits queremos trazer para a nossa branch. Mas 	veja que isso pode ser perigoso: às vezes, trazer um commit isolado, sem os commits ao redor, pode 	gerar problemas de merge ou até mesmo problemas no código.
+	O cherry-pick dificilmente será usado quando as alterações todas ficam aglomeradas em um grande commit.
+git-cola - Ferramenta gráfica para utilizar o git. Antes de utilizar é necessário baixa-lo e instalar. 	http://git-cola.github.io/downloads.html
 
 
 
@@ -115,7 +121,6 @@ A seguir, será solicitada a entrada de uma senha para a chave de segurança. Caso
 Agora será necessário realizar o login no http://github.com e seguir para as configurações do seu perfil. Siga "Settings", "SSH and GPG keys" e "New SSH key".
 
 Insira na caixa de texto o conteúdo do seu arquivo id_rsa.pub. O local exato do arquivo foi informado na saída do processo de criação da chave. Cole-o exatamente como ele está, sem adição de espaços ou quebras de linha.
-
 
 
 
@@ -202,7 +207,7 @@ Branch:
 
 Conflitos: 
 
-	Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um 		conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o 	conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão 		inseridas.
+	Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um 		conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o 	conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão 			inseridas.
 
 	Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, gerados por diferentes 		commits, de merge.
 
@@ -216,7 +221,7 @@ Anotações do Git:
 		//Código do remote que gerou conflito
 	>>>>> hashcode
 
-	Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece 	forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é 	necessário um git add .,
+	Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece 		forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é 			necessário um git add .,
 	indicando ao git que foi finalizado o merge e pode fazer um commit e push.
 
 	Lock: Travar um determinado arquivo para que só você possa edita-lo.
@@ -225,7 +230,7 @@ Anotações do Git:
 
 Merge:
 	>>>>>
-	git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa 	lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t 	nome_do_programa.
+	git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa 	lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t 		nome_do_programa.
 	=====
 	<<<<<
 
@@ -239,7 +244,7 @@ Aliases:
 		co = checkout
 	isso dentro do arquivo.
 
-
+Ferramentas gráficas, Git-Cola, 
 
 Desafio:
  Problemas com o merge
@@ -260,12 +265,13 @@ O que é gitflow ?
 
 Estudar mais os estados do git:  Working Directory, Index, HEAD!
 
-Estudar o bisect!
+Estudar o bisect, cherry pick!
 
 Como ver as alterações de cada commit ?
 git show <hash commit>
 
-Estudar mais sobre o git rebase e o git fecth.
+Estudar mais sobre o git rebase, git merge e o git fecth.
+http://www.leandrosales.com.br/2012/09/05/git-merge-git-rebase-e-outras-funcionalidades-do-git/
 
 Como saber quais os arquivos estão no add .(estado de Index)
 
