@@ -275,5 +275,9 @@ http://www.leandrosales.com.br/2012/09/05/git-merge-git-rebase-e-outras-funciona
 
 Como saber quais os arquivos estão no add .(estado de Index)
 
+Referencias:
 
+Primeiros passos com o git:
+
+https://imasters.com.br/desenvolvimento/os-primeiros-passos-com-git/?trace=1519021197&source
 
