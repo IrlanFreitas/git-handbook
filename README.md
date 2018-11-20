@@ -172,7 +172,6 @@ git config user.email "" - Configurando quem é o usuário que está fazendo o c
 
 Move os commits de uma determinada branch para outra branch.
 
-Git 
 
 ***git rebase master(base) desenvolvimento(branch que será atualizada)*** - Atualiza um branch com base em outra, para evitar os commits de merge e conflitos muito grandes.
 
@@ -204,79 +203,86 @@ ___
 **--abort** : volta atrás em todo o processo de rebase
 ___
 
-git checkout --(Dois hífens) nomeArquivo - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add, quer dizer no estado de Working Directory, então o arquivo ficará no estado HEAD da branch atual. Caso se possua um arquivo como o mesmo nome da branch utilizar o parametro de --(Dois hífens) para indica que daqui pra frente só serão passados arquivos.
+**git checkout --(Dois hífens) nomeArquivo** - Comando que coloca o arquivo(s) como estava no ultimo commit antes do git add, quer dizer no estado de Working Directory, então o arquivo ficará no estado HEAD da branch atual. Caso se possua um arquivo como o mesmo nome da branch utilizar o parametro de --(Dois hífens) para indica que daqui pra frente só serão passados arquivos.
 
-git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo> - Coloca o arquivo prospota_1, mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou qualquer outro somente utilizar o hash do commit. Isso quando o arquivo(s) já estão em estado de Index.
+**git reset HEAD<estado> proposta_1.html<arquivo ou . para mais de um arquivo>** - Coloca o arquivo prospota_1, mesmo depois de estar preparado para o commit com o add, para como era antes do estado de HEAD ou qualquer outro somente utilizar o hash do commit. Isso quando o arquivo(s) já estão em estado de Index.
 
-git reset 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Voltar ao estado do commit anterior ou fazer uma alteração no commit anterior.
+**git reset 92b1c7363f6046df8bf16107f46517cca8529087**<identificador do commit> - Voltar ao estado do commit anterior ou fazer uma alteração no commit anterior.
 
-git revert 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Defazer as alterações de um commit.
+**git revert 92b1c7363f6046df8bf16107f46517cca8529087**<identificador do commit> - Defazer as alterações de um commit.
 
-git stash - Repositório criado temporariamente para salvar as alterações, para que depois se retorne a continuar de onde foi salvo nesse repositório temporario.
+**git stash** - Repositório criado temporariamente para salvar as alterações, para que depois se retorne a continuar de onde foi salvo nesse repositório temporario.
 
-git stash list - Exibe se há algo guardado no stash para ser retomado.
+**git stash list** - Exibe se há algo guardado no stash para ser retomado.
 
-git stash pop - Traz o ultimo stash da lista
+**git stash pop** - Traz o ultimo stash da lista
 
-git stash apply/pop stats@{0}<código do stash> - Aplica o stash ao repositório, o qual foi indicado pelo código.
+**git stash apply/pop stats@{0}<código do stash>** - Aplica o stash ao repositório, o qual foi indicado pelo código.
 
-git stash drop - Apaga as alterações temporárias guardadas no stash.
+**git stash drop** - Apaga as alterações temporárias guardadas no stash.
 
-git stash clear - Apaga TODA a pilha salva no stash guardado.
+**git stash clear** - Apaga TODA a pilha salva no stash guardado.
 
-git bisect start - Entrar em modo de bisect para procurando commits que tenham alterações que a gente quer.
+**git bisect start** - Entrar em modo de bisect para procurando commits que tenham alterações que a gente quer.
 
-é necessário que informe ao bisect qual commit é ruim, não tem as alterações que você procura e qual o commit que é bom.
+É necessário que informe ao bisect qual commit é ruim, não tem as alterações que você procura e qual o commit que é bom.
 
-git bisect bad HEAD - Indicando que o estado de HEAD do git é o commit ruim.
+**git bisect bad HEAD** - Indicando que o estado de HEAD do git é o commit ruim.
 
-git bisect good 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Indicando qual o commit é o bom para procurar as alterações.
+**git bisect good 92b1c7363f6046df8bf16107f46517cca8529087 *identificador do commit*** - Indicando qual o commit é o bom para procurar as alterações.
 
-git show 92b1c7363f6046df8bf16107f46517cca8529087<identificador do commit> - Exibe quais alterações foram feitas nesse commit
+**git show 92b1c7363f6046df8bf16107f46517cca8529087 *identificador do commit*** - Exibe quais alterações foram feitas nesse commit
 
-git show <.(ponto) ou nomeArquivo.ext> - Exibe quais alterações foram em todos os arquivos com o ponto e no arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
+**git show <.(ponto) ou nomeArquivo.ext>** - Exibe quais alterações foram em todos os arquivos com o ponto e no arquivo especifíco como nomeArquivo.ext isso no estado de Working Directory ou em outros estados.
 
-git cherry-pick <hash commit> - Traz somente commits colocados no hash para a branch que se está, como exemplo:
+**git cherry-pick <hash commit>** - Traz somente commits colocados no hash para a branch que se está, como exemplo:
 
 Desenvolver funcionalidades em uma branch chamada dev, depois de corrigido bugs, como ainda se está fazendo as novas features, seleciona o commit com os ajustes, traz para master com o cherry-pick e continua a desenvolver na branch dev.
-
-Perigos do Cherry Pick:
+<br><br>
+___
+### Perigos do Cherry Pick:
 
 Com cherry-pick, temos a liberdade de escolher quais commits queremos trazer para a nossa branch. Mas veja que isso pode ser perigoso: às vezes, trazer um commit isolado, sem os commits ao redor, pode gerar problemas de merge ou até mesmo problemas no código.
 
 O cherry-pick dificilmente será usado quando as alterações todas ficam aglomeradas em um grande commit.
 
 git-cola - Ferramenta gráfica para utilizar o git. Antes de utilizar é necessário baixa-lo e instalar. http://git-cola.github.io/downloads.html
-
+___
+<br><br>
 ## Chaves de Segurança (SSH)
 
 Agora que temos o Git instalado, podemos utilizar os serviços do Github. Primeiro precisamos criar uma conta. Para isso acessamos a página https://github.com/plans, escolhemos o tipo de conta que queremos criar e prosseguimos preenchendo os formulários pedidos.
 
-Depois de criada nossa conta, precisamos gerar uma senha (chave de segurança) que será responsável por identificar nossa máquina quando fizermos as interações entre nosso projeto e o serviço do Github. Caso não exista essa configuração entre nossa máquina e a conta do Github, o acesso ao serviço pelos comandos do Git será negado.
+Depois de criada nossa conta, precisamos gerar uma senha **(chave de segurança)** que será responsável por identificar nossa máquina quando fizermos as interações entre nosso projeto e o serviço do Github. Caso não exista essa configuração entre nossa máquina e a conta do Github, o acesso ao serviço pelos comandos do Git será negado.
 
 O processo de criação da chave de segurança é similar em todos os sistemas operacionais: basta abrir o prompt de comando (no caso do Windows, é necessário abrir o Git Bash) e inserir o seguinte comando:
 
-ssh-keygen -t rsa -C "seu_email@provedor.com"
+comando: **ssh-keygen -t rsa -C "seu_email@provedor.com"**
 
 Lembre-se de substituir seu_email@provedor.com pelo seu endereço real de email. A resposta do terminal vai perguntar em qual local do seu disco você quer salvar sua chave de segurança. Para evitar problemas, mantenha a opção padrão. Em algumas versões, pode ser necessário incluir também a opção -b 2048 ou -b 4096 para indicar o tamanho da chave a ser gerada.
 
 A seguir, será solicitada a entrada de uma senha para a chave de segurança. Caso o computador seja público ou compartilhado, é recomendado que sua chave esteja protegida por uma senha. Caso contrário, recomendamos que a senha seja ignorada, bastando pressionar Enter ao ser solicitada a senha e a confirmação de senha.
 
-Agora será necessário realizar o login no http://github.com e seguir para as configurações do seu perfil. Siga "Settings", "SSH and GPG keys" e "New SSH key".
+Agora será necessário realizar o login no http://github.com e seguir para as configurações do seu perfil. Siga **Settings** >  **SSH and GPG keys** > **New SSH key**.
 
-Insira na caixa de texto o conteúdo do seu arquivo id_rsa.pub. O local exato do arquivo foi informado na saída do processo de criação da chave. Cole-o exatamente como ele está, sem adição de espaços ou quebras de linha.
+Insira na caixa de texto o conteúdo do seu arquivo **id_rsa.pub**. O local exato do arquivo foi informado na saída do processo de criação da chave. Cole-o exatamente como ele está, sem adição de espaços ou quebras de linha.
+___
+<br><br>
+## Estágios do Git:
 
-Estágios do Git:
+Criar diretório sem nenhum arquivo a ser rastreado - **Working Directory**
 
-Criar diretório sem nenhum arquivo a ser rastreado - Working Directory
+Depois de adicionar untrackted files ao git com o git add é iniciado um novo estágio - **Index ou Staging Area**
 
-Depois de adicionar untrackted files ao git com o git add é iniciado um novo estágio - Index ou Staging Area
+Depois de satisfeitos com o os conteúdos no Index, podemos dar o proximo passo com o git commit e iniciar um novo estágio o **HEAD**, é o último estado que o git usa como referência.
 
-Depois de satisfeitos com o os conteúdos no Index, podemos dar o proximo passo com o git commit e iniciar um novo estágio o HEAD, é o último estado que o git usa como referência.
+	working directory representa o estado atual dos arquivos no repositório. 
+	Podemos utilizar o comando git add para adicioná-los ao index, ou staging area, que representa uma visão 
+	preliminar das modificações que queremos definir para nosso projeto, 
+	comparando essas ao HEAD, o último passo completo do nosso projeto, que serve de 
+	referência para comparação do trabalho com o working directory.
 
-*working directory representa o estado atual dos arquivos no repositório. Podemos utilizar o comando git add para adicioná-los ao index, ou staging area, que representa uma visão preliminar das modificações que queremos definir para nosso projeto, comparando essas ao HEAD, o último passo completo do nosso projeto, que serve de referência para comparação do trabalho com o working directory.
-
-Observações:
+**Observações:**
 
 Sempre utilizado o git status para ter noção de como estão os arquivos no projeto.
 
@@ -293,62 +299,65 @@ O comando git add pode ser executado de modo interativo com a opção -i. Ao rod
 Num ciclo simples de controle de um projeto com o Git, muitas vezes podemos querer adicionar ao HEAD todas as alterações que foram realizadas no working directory. O comando git commit oferece uma opção para que possamos evitar o passo de adicionar manualmente os arquivos ao index, gerando um commit que já inclui todas as modificações feitas no projeto.
 
 by using the -a switch with the commit command to automatically "add" changes from all known files (i.e. all files that are already listed in the index) and to automatically "rm" files in the index that have been removed from the working tree, and then perform the actual commit;
-
-Projetos locais já existentes:
+___
+<br><br>
+## Projetos locais já existentes:
 
 Dentro da pasta onde está o código, usar o comando abaixo para iniciar o repositório
 
-$ git init
+**git init**
 
 Para adicionar todas os arquivos para o próximo commit, executar o comando abaixo
 
-$ git add .
+**git add .**
 
 Para efetuar o primeiro commit para seu repositório local, executar o comando abaixo
 
-$ git commit -m "Primeiro Commit"
+**git commit -m "Primeiro Commit"**
 
 Para adicionar um endereço de repositório remoto, executar o comando abaixo
 
-$ git remote add origin endereco_do_repositorio.git
+**git remote add origin endereco_do_repositorio.git**
 
 Para enviar o código para o repositório remoto adicionado anteriormente, executar o comando abaixo
 
-$ git push -u origin master
+**git push -u origin master**
 
 Fonte de informações https://help.github.com/articles/adding-an-existing-project-to-github-using-the- command-line/
+___
+<br><br>
 
-Github:
+## Github:
 
 Boas práticas, depois de clonar o repositório que se quer trabalhar, é necessário criar uma branch para trabalhar, pois não é recomendado trabalhar direto na master que deve servir somente de sincronização com o remoto. Depois das alterações feitas na branch criada, git status -> git add . -> git commit -m , é necessário trocar de branch com o git checkout e fazer o git marge branch, pois você já está na master e subi essas alterações.
 
-Fork - Criar um cópia de um projeto/repositório que você não tem permissão para poder commitar na sua conta.
+**Fork** - Criar um cópia de um projeto/repositório que você não tem permissão para poder commitar na sua conta.
 
-Pull Request - Solicitando ao owner/dono do projeto que você deseja enviar uma modificação que você fez, no seu projeto clonado, mesmo que você não tenha permissão para commitar.
+**Pull Request** - Solicitando ao owner/dono do projeto que você deseja enviar uma modificação que você fez, no seu projeto clonado, mesmo que você não tenha permissão para commitar.
 
-Watch - Permite seguir um repositório e acompanhar seu progresso, sem necessáriamente contribuir. Github te notifica a cada atividade que ocorre no repositório, te permitindo acompanhar praticamente em tempo real o andamento do projeto.
+**Watch** - Permite seguir um repositório e acompanhar seu progresso, sem necessáriamente contribuir. Github te notifica a cada atividade que ocorre no repositório, te permitindo acompanhar praticamente em tempo real o andamento do projeto.
 
 Interessante quando se trabalha com o git, depois do fork, ter dois remotes, um para o seu repositório e outro para o original, nesse caso teria um git remote add origin url_fork.git e outro, git remote add original url_original.git, para sempre manter atualizado. Agora para atualizar é necessário utilizar o nome do repositório corretamente no caso do pull, como git pull ORIGINAL master, que é o repositório onde se está fazendo fork.
 
-Clonar:
-
-Pegando um repositório que já existe, para fazer isso é necessário ir no repositório (Github) e obter a url e utilizar o comando git clone URL.git
+**Clonar** - Pegando um repositório que já existe, para fazer isso é necessário ir no repositório (Github) e obter a url e utilizar o comando git clone URL.git
 
 Adicionar colaboradores:
 
-Para adicionar outros usuários ao seu repositório é necessário no repositório,
+	Para adicionar outros usuários ao seu repositório é necessário no repositório,
 
-Um projeto no Github pode ter diversos colaboradores. Para fazer isso, siga as instruções abaixo:
+	Um projeto no Github pode ter diversos colaboradores. Para fazer isso, siga as instruções abaixo:
 
-Abra a página do projeto no Github
+	Abra a página do projeto no Github
 
-Abra a aba Settings
+	Abra a aba Settings
 
-Clique na seção Collaborators, à esquerda
+	Clique na seção Collaborators, à esquerda
 
-Digite o usuário do colaborador no campo ao lado do botão Add collaborator. Durante a digitação, aparecerão os usuários mais próximos da busca atual.
-
-Branch:
+	Digite o usuário do colaborador no campo ao lado do botão Add collaborator. 
+	Durante a digitação, aparecerão os usuários mais próximos da busca atual.
+___
+<br><br>
+## Branch:
 
 Branch - Ramo, uma separação da linha principal de desenvolvimento
 
@@ -360,7 +369,7 @@ https://git-scm.com/book/pt-br/v1/Ramifica%C3%A7%C3%A3o-Branching-no-Git-O-que-%
 
 Para fazer que uma determinida pasta deixe de ser um repositório é só apagar a pasta .git
 
-Conflitos:
+## Conflitos:
 
 Quando a mesma linha de um mesmo arquivo é alterada por dois desenvolvedores ao mesmo tempo, ocorre um conflito. Neste caso, é necessário que o desenvolvedor que for executar o merge decida como lidar com o conflito, seja escolhendo entre uma das alterações ou escolhendo a ordem em que as duas serão inseridas.
 
@@ -368,11 +377,12 @@ Chamamos esse processo de tratar as diferenças existentes no mesmo arquivo, ger
 
 Acontece quando se faz um pull <remote> <branch> e o git não consegue resolver automaticamento o conflito
 
-Depois do pull seu arquivo terá anotações como essas:
 
-Anotações do Git:
 
-<<<<< HEAD
+## Anotações do Git:
+*Depois do pull seu arquivo terá anotações como essas:*
+
+**<<<<< HEAD**
 
 //Seu código como está no repositório local
 
@@ -380,27 +390,27 @@ Anotações do Git:
 
 //Código do remote que gerou conflito
 
->>>>> hashcode
+    >>>>> hashcode
 
 Para fazer o merge é necessário organizar o arquivo, na sua ide/text editor pois o git não oferece forma de fazer isso no terminal ou fora dele, e organizar da forma que deseja, depois disso é necessário um git add .,
 
 indicando ao git que foi finalizado o merge e pode fazer um commit e push.
 
-Lock: Travar um determinado arquivo para que só você possa edita-lo.
+**Lock**: Travar um determinado arquivo para que só você possa edita-lo.
 
 Lidando com conflitos, cada desenvolvedor ira trabalhar em uma branch
 
-Merge:
+**Merge**:
 
->>>>>
+    >>>>>
 
 git mergetool --tool-help : mostra no console uma lista de programas possíveis de ser utilizados. Dessa lista, pode-se escolher um, instalar no seu computador e utilizar através do comando git mergetool -t nome_do_programa.
 
-=====
+    =====
+    
+    <<<<<
 
-<<<<<
-
-Aliases:
+**Aliases**:
 
 Criando comandos novos para digitar menos os comandos, fazendo isso no arquivo dentro do gitconfig
 
@@ -416,11 +426,7 @@ isso dentro do arquivo.
 
 Ferramentas gráficas, Git-Cola,
 
-Desafio:
-
-Problemas com o merge
-
-PRÓXIMA ATIVIDADE
+### Observações:
 
 O processo de tratar conflitos é o mais crítico quando se trabalha com controle de versões e também um dos mais complicados de se compreender.
 
@@ -428,7 +434,7 @@ Se em nenhum momento você já precisou realizar o processo de merge quando trab
 
 Faça o teste! Crie um repositório local e acesse por duas abas diferentes do terminal, em duas branches diferentes. Faça diversas alterações em cada uma, jogue as alterações para a master e veja quais as dificuldades.
 
-Dúvidas:
+## Dúvidas:
 
 Como commitar o código de uma branch para outra ?
 
